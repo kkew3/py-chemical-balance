@@ -1,0 +1,8 @@
+build/
+*.c
+__pycache__/
+*.swp
+*.so
+*.pyd
+rt/
+venv/
