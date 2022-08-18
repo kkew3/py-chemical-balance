@@ -4,7 +4,7 @@ import sys
 
 import numpy as np
 
-from gaussel import gaussian_elimination
+import gaussel
 import parseeq
 
 
@@ -42,8 +42,11 @@ def solveeq(string):
     A = parseeq.form_coef_mat(parseeq.parseeq(parseeq.preprocesseq(string)))
     p = np.arange(A.shape[0])
     q = np.arange(A.shape[1])
-    rank = gaussian_elimination(A, p, q)
+    rank = gaussel.gaussian_elimination(A, p, q)
     B = nullspace_basis(A, p, q, rank)
+    Q = gaussel.find_opt_basis_transform(B, 1000000)
+    print(Q)
+    B = np.matmul(B, Q)
     B = [B[:, j].tolist() for j in range(B.shape[1])]
     B = [proc_basis(b) for b in B]
     return B

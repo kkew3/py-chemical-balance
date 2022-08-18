@@ -74,3 +74,37 @@ def gaussian_elimination(np.ndarray[np.double_t, ndim=2] A,
             for h in range(j, n):
                 A[p[k], q[h]] -= l * A[p[j], q[h]]
     return rank
+
+
+cdef int count_pos(np.ndarray[np.double_t, ndim=2] A):
+    cdef:
+        int m = A.shape[0]
+        int n = A.shape[1]
+        int i, j, c = 0
+    for j in range(n):
+        for i in range(m):
+            if A[i, j] <= 1e-6:
+                break
+        else:
+            c += 1
+    return c
+
+
+def find_opt_basis_transform(np.ndarray[np.double_t, ndim=2] B, int max_iter):
+    cdef:
+        int m = B.shape[0], n = B.shape[1]
+        int ul_count = n
+        np.ndarray[np.double_t, ndim=2] Q, _R
+        np.ndarray[np.double_t, ndim=2] optQ = np.eye(n)
+        int i, count, opt_count = count_pos(B)
+    if opt_count == ul_count:
+        return optQ
+    for i in range(max_iter):
+        Q, _R = np.linalg.qr(np.random.randn(n, n))
+        count = count_pos(np.matmul(B, Q))
+        if count > opt_count:
+            opt_count = count
+            optQ = Q
+            if opt_count == ul_count:
+                break
+    return optQ
