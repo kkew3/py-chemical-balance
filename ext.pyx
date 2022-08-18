@@ -101,7 +101,7 @@ def find_opt_basis_transform(np.ndarray[np.double_t, ndim=2] B, int max_iter):
         return optQ
     for i in range(max_iter):
         Q, _R = np.linalg.qr(np.random.randn(n, n))
-        count = count_pos(np.matmul(B, Q))
+        count = count_pos(np.matmul(Q, B.T).T)
         if count > opt_count:
             opt_count = count
             optQ = Q

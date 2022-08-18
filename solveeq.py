@@ -45,8 +45,7 @@ def solveeq(string):
     rank = ext.gaussian_elimination(A, p, q)
     B = nullspace_basis(A, p, q, rank)
     Q = ext.find_opt_basis_transform(B, 1000000)
-    print(Q)
-    B = np.matmul(B, Q)
+    B = np.matmul(Q, B.T).T
     B = [B[:, j].tolist() for j in range(B.shape[1])]
     B = [proc_basis(b) for b in B]
     return B
