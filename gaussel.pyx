@@ -5,7 +5,7 @@ cimport cython
 np.import_array()
 
 
-cdef swap(np.ndarray[np.int_t, ndim=1] p, int i, int j):
+cdef void swap(np.ndarray[np.int_t, ndim=1] p, int i, int j):
     cdef np.int_t tmp
     if i != j:
         tmp = p[i]
@@ -13,9 +13,9 @@ cdef swap(np.ndarray[np.int_t, ndim=1] p, int i, int j):
         p[j] = tmp
 
 
-cdef select_pivot(np.ndarray[np.double_t, ndim=2] A, int i,
-                  np.ndarray[np.int_t, ndim=1] p,
-                  np.ndarray[np.int_t, ndim=1] q):
+cdef np.double_t select_pivot(np.ndarray[np.double_t, ndim=2] A, int i,
+                              np.ndarray[np.int_t, ndim=1] p,
+                              np.ndarray[np.int_t, ndim=1] q):
     cdef:
         int ii, jj
         m = A.shape[0]
