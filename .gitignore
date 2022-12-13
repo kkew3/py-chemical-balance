@@ -6,3 +6,4 @@ __pycache__/
 *.pyd
 rt/
 venv/
+docs/

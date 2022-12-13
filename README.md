@@ -46,3 +46,7 @@ python setup.py build_ext --inplace
 ```
 
 其中最后两个有两种（线性无关的）配平方式，但用现有方法只能找出一个非最优配平。倒数第二个因精度问题是错误的，最后一个允许小数系数，是正确的。顺便说一下，最后一个的两种最优配平分别为：`6 12 2 4 3 24` 和 `4 8 2 2 1 16`。
+
+# 进一步的系统性讨论
+
+参见[PDF](https://github.com/kkew3/py-chemical-balance/blob/master/README.pdf)。
